@@ -1,0 +1,276 @@
+var teams = prompt("Enter team names : ");
+var overs = prompt("Enter overs : ");
+overs = Number(overs);
+teams = teams.split(" ");
+var players1 = [
+ { name: "Player 1", runs: 0 },
+ { name: "Player 2", runs: 0 },
+ { name: "Player 3", runs: 0 },
+ { name: "Player 4", runs: 0 },
+ { name: "Player 5", runs: 0 },
+ { name: "Player 6", runs: 0 },
+ { name: "Player 7", runs: 0 },
+ { name: "Player 8", runs: 0 },
+ { name: "Player 9", runs: 0 },
+ { name: "Player 10", runs: 0 },
+ { name: "Player 11", runs: 0 }
+];
+
+var players2 = [
+ { name: "Player 1", runs: 0 },
+ { name: "Player 2", runs: 0 },
+ { name: "Player 3", runs: 0 },
+ { name: "Player 4", runs: 0 },
+ { name: "Player 5", runs: 0 },
+ { name: "Player 6", runs: 0 },
+ { name: "Player 7", runs: 0 },
+ { name: "Player 8", runs: 0 },
+ { name: "Player 9", runs: 0 },
+ { name: "Player 10", runs: 0 },
+ { name: "Player 11", runs: 0 }
+];
+
+function delay(milliseconds) {
+ return new Promise(resolve => setTimeout(resolve, milliseconds));
+}
+
+async function mycode() {
+ await delay(1000); // Delay of 2000 milliseconds (2 seconds)
+ alert("Today match is betweeen Team "+teams[0]+" Team "+teams[1])
+ 
+ var toss = prompt("Heads or Tails Team "+teams[0]+" chooses : ");
+ toss.toLowerCase();
+ await delay(3000);
+ var x = Math.random() *2 +1;
+ x = Math.floor(x);
+ var result = "";
+ var win = 0;
+ if(x === 1){
+     result="heads";
+     alert("It's head")
+ }
+ else{
+     result="tails";
+     alert("It's tails")
+ }
+ 
+ await delay(1000);
+ if(toss === result){
+     alert(teams[0]+" will bat first");
+     win = 0;
+ }
+ else{
+      alert(teams[1]+" will bat first");
+      win = 1;
+ }
+ 
+ await delay(1000);
+ alert(overs + " over match started. "+teams[win]+" will bat frist")
+ 
+ var score1 = 0
+ var wickets = 0
+ var scorereg = /[1-3]/
+ var tracker = 1;
+ var team1 = []
+ var team2 = []
+ if(win === 0){
+     team1 = players1
+     team2 = players2
+ }
+ else{
+     team1 = players2
+     team2 = players1
+ }
+ var currentplayers = team1.slice(0,2);
+ var onstrike = currentplayers[0]
+ for(var i = 0 ; i<overs;i++){
+     await delay(2000);
+     alert("Over#"+(i+1)+"Started : ")
+     for(var j=0;j<6;j++){
+         alert(onstrike.name + " is on strike !!")
+         var runs = Math.random()*7 ;
+         runs = Math.floor(runs);
+         if(runs === 0){
+             alert("It's a wicket")
+             await delay(2000)
+             wickets++;
+             tracker ++;
+             if (onstrike === currentplayers[0]){
+                 currentplayers[0] = team1[tracker]
+                 onstrike = currentplayers[0]
+             }
+             else{
+                  currentplayers[1] = team1[tracker]
+                  onstrike = currentplayers[1]
+             }
+             
+         }
+         else if(scorereg.test(runs)){
+             alert(runs +" score !")
+             await delay(1000)
+             score1 += runs
+             onstrike.runs += runs
+         }
+         else if(runs === 4 || runs === 6 || runs === 5){
+             alert("Brilliant "+ runs+" runs !")
+             await delay(1000)
+             score1 += runs
+             onstrike.runs += runs
+         }
+         if (runs % 2 === 1){
+             if(onstrike === currentplayers[0]){
+                 onstrike = currentplayers[1]
+             }
+             else{
+                 onstrike = currentplayers[0]
+             }
+         }
+         
+     }
+     
+     alert(teams[win]+":"+score1+" / "+wickets);
+     alert(currentplayers[0].name+" : "+currentplayers[0].runs)
+     alert(currentplayers[1].name+" : "+currentplayers[1].runs)
+     if (wickets === 10){
+         alert("All out !")
+         break;
+     }
+     var wth = Math.random()*10+1
+     wth = Math.floor(wth);
+     if(wth < 3){
+         alert("Rain started . Delay for 5s")
+         await delay(5000);
+     }
+     else if(wth < 4){
+         alert("Fog started . Delay for 10s")
+         await delay(10000);
+     }
+ }
+ alert("\n Innings # 2 \n")
+ var score2 = 0
+ var wickets2 = 0
+ tracker = 1;
+ currentplayers = ""
+ currentplayers = team2.slice(0,2);
+ onstrike = currentplayers[0]
+ for(var i = 0 ; i<overs;i++){
+     await delay(2000);
+     alert("Over#"+(i+1)+"Started : ")
+     for(var j=0;j<6;j++){
+         alert(onstrike.name + " is on strike !!")
+         var runs = Math.random()*7 ;
+         runs = Math.floor(runs);
+         
+         if(runs === 0){
+             alert("It's a wicket")
+             await delay(2000)
+             wickets2++;
+              tracker ++;
+             if (onstrike === currentplayers[0]){
+                 currentplayers[0] = team2[tracker]
+                 onstrike = currentplayers[0]
+             }
+             else{
+                  currentplayers[1] = team1[tracker]
+                  onstrike = currentplayers[1]
+             }
+         }
+         else if(scorereg.test(runs)){
+             alert(runs +" score !")
+             await delay(1000)
+             score2 += runs
+             onstrike.runs += runs
+         }
+         else if(runs === 4 || runs === 6 || runs === 5){
+             alert("Brilliant "+ runs+" runs !")
+             await delay(1000)
+             score2 += runs
+             onstrike.runs += runs
+         }
+         
+          if (runs % 2 === 1){
+             if(onstrike === currentplayers[0]){
+                 onstrike = currentplayers[1]
+             }
+             else{
+                 onstrike = currentplayers[0]
+             }
+         }
+         
+         if (score2 > score1){
+             break;
+         }
+         
+     }
+     
+     if (score2 > score1){
+             break;
+         }
+        var x ;
+      if(win === 1){
+         x = 0
+     }
+     else{
+         x = 1
+     }      
+     
+     alert(teams[x]+":"+score2+" / "+wickets2);
+      alert(currentplayers[0].name+" : "+currentplayers[0].runs)
+     alert(currentplayers[1].name+" : "+currentplayers[1].runs)
+     if (wickets2 === 10){
+         alert("All out !")
+         break;
+     }
+     var wth = Math.random()*10+1
+     wth = Math.floor(wth);
+     if(wth < 2){
+         alert("Rain started . Delay for 5s")
+         await delay(5000);
+     }
+     else if(wth < 3){
+         alert("Fog started . Delay for 10s")
+         await delay(10000);
+     }
+     
+ }
+ if (score1 > score2){
+     alert(teams[win]+" wins the game")
+ }
+ else if (score1 < score2){
+     var x = 0;
+     if (win ==0){
+         x = 1;
+     }
+     else{
+         x= 0
+     }
+     alert(teams[x]+"wins the game")
+ }
+ else{
+     alert("It's a tie")
+ }
+ 
+ if (win === 0){
+ alert(teams[0]+" : "+score1+" / "+wickets);
+ alert(teams[1]+" : "+score2+" / "+wickets2);}
+ else{
+     alert(teams[0]+" : "+score2+" / "+wickets2);
+ alert(teams[1]+" : "+score1+" / "+wickets);}
+ 
+var players1String = teams[0] + ":\n";
+players1.forEach(function(player) {
+ players1String += "Name: " + player.name + ", Runs: " + player.runs + "\n";
+});
+ 
+var players2String = teams[1] + ":\n";
+players2.forEach(function(player) {
+ players2String += "Name: " + player.name + ", Runs: " + player.runs + "\n";
+});
+
+alert(players1String);
+alert(players2String);
+
+ 
+}
+
+mycode()

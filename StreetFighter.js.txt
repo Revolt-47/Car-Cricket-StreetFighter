@@ -1,0 +1,133 @@
+
+const streetFighterPlayers = [
+    "Ryu",
+    "Ken",
+    "Chun-Li",
+    "Guile",
+    "Blanka",
+    "Dhalsim",
+    "E. Honda",
+    "Zangief",
+    "Balrog",
+    "Vega",
+    "Sagat",
+    "M. Bison",
+    "Cammy",
+    "Fei Long",
+    "Dee Jay",
+    "T. Hawk",
+    "Akuma",
+    "Sakura",
+    "Rose",
+    "Dan",
+    "Cody",
+    "Adon",
+    "Guy",
+    "Hakan",
+    "Evil Ryu",
+    "Oni",
+    "Yun",
+    "Yang",
+    "Juri",
+    "Ibuki",
+    "Makoto",
+    "Dudley",
+    "Elena",
+    "Rolento",
+    "Poison",
+    "Hugo",
+    "Decapre",
+    "El Fuerte",
+    "Gouken",
+    "Seth",
+    "Twelve",
+    "Remy",
+    "Q",
+    "Urien",
+    "Necro",
+    "Oro",
+    "Sean"
+  ];
+  
+  alert(streetFighterPlayers);
+  var selection = prompt("Choose your character (0-46):");
+  if (selection === "") {
+    selection = Math.floor(Math.random() * 47);
+  }
+  selection = Number(selection);
+  selection = streetFighterPlayers[selection];
+  alert("You selected: " + selection);
+  var computer = streetFighterPlayers[Math.floor(Math.random() * 47)];
+  alert("Your opponent is: " + computer);
+  
+  alert(selection + " vs " + computer);
+  var healthP = 100;
+  var healthC = 100;
+  
+  while (healthP > 0 && healthC > 0) {
+    var moveP = prompt(
+      "Enter your move: \n1. Punch: 10% Damage\n2. Kick: 10% Damage\n3. Hadoken: 15% Damage\n4. Jump: 0% Damage\n5. Special attack: 30% Damage"
+    );
+    
+    if(moveP === ""){
+        moveP = Math.floor(Math.random() * 5) + 1;
+    }
+    var moveC = Math.floor(Math.random() * 5) + 1;
+  
+    if (moveP === "4" || moveC === 4) {
+        alert("Jumps . Dodged")
+      continue;
+    }
+  
+    switch (moveP) {
+      case "1":
+        alert(selection + " performs Punch");
+        healthC -= 10;
+        break;
+      case "2":
+        alert(selection + " performs Kick");
+        healthC -= 10;
+        break;
+      case "3":
+        alert(selection + " performs Hadoken");
+        healthC -= 15;
+        break;
+      case "5":
+        alert(selection + " performs Special Attack");
+        healthC -= 30;
+        break;
+      default:
+        alert("Invalid move");
+        continue;
+    }
+  
+    switch (moveC) {
+      case 1:
+        alert(computer + " performs Punch");
+        healthP -= 10;
+        break;
+      case 2:
+        alert(computer + " performs Kick");
+        healthP -= 10;
+        break;
+      case 3:
+        alert(computer + " performs Hadoken");
+        healthP -= 15;
+        break;
+      case 5:
+        alert(computer + " performs Special Attack");
+        healthP -= 30;
+        break;
+    }
+  
+    alert("Player health: " + healthP);
+    alert("Computer health: " + healthC);
+  }
+  
+  if (healthP > 0) {
+    alert(selection + " Wins! .Congratulations!");
+  } else if(healthC > 0){
+    alert(computer + " wins! Game Over!");
+  }else{
+      alert("It's a tie")
+  } 
